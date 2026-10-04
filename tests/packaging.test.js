@@ -92,7 +92,7 @@ test("the Dockerfile builds a non-root stdio image from a pinned base with no se
 test("the MCPize manifest is paid-managed: the publisher's key is a secret, never a per-user credential", () => {
   const y = read("mcpize.yaml");
   assert.match(y, /^runtime: container$/m);
-  assert.match(y, /^secrets:\n  - name: MARKET_PULSE_API_KEY$/m);
+  assert.match(y, /^secrets:\n  - name: MARKET_PULSE_API_KEY\n    required: true$/m, "MCPize rejects a secret that does not say whether it is required");
   assert.doesNotMatch(y, /^credentials/m, "subscribers must not be asked for a Market Pulse key");
   assert.doesNotMatch(y, /mpk_/);
   assert.match(y, /paid access buys delivery, not verdicts/i);
@@ -154,4 +154,14 @@ test("the licence header and NOTICE name the right owner and reserve the marks",
   assert.match(read("NOTICE"), /T3raTech Solutions \(Pvt\) Ltd/);
   assert.match(read("NOTICE"), /Trademarks/);
   assert.equal(pkg.license, "Apache-2.0");
+});
+
+test("the README's listing table links only to https destinations and keeps the MCPize listing honest about being paid", () => {
+  const readme = read("README.md");
+  const section = readme.split("## Where it is listed")[1].split("## Configuration")[0];
+  const links = [...section.matchAll(/\]\((https?:[^)]+)\)/g)].map(m => m[1]);
+  assert.ok(links.length >= 7);
+  for (const link of links) assert.match(link, /^https:\/\//, link);
+  assert.match(section, /MCPize \(managed, paid\)/);
+  assert.match(section, /glama\.ai\/mcp\/servers\/t3ratech\/market-pulse-mcp\/badges\/score\.svg/);
 });

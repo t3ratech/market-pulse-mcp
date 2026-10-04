@@ -14,4 +14,5 @@ startCommand:
     - src/server.js
 secrets:
   - name: MARKET_PULSE_API_KEY
+    required: true
     description: Publisher's Market Pulse API key, used for every subscriber call.

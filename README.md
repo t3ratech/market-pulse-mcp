@@ -86,6 +86,21 @@ Prefer not to manage a key? The [MCPize listing](https://mcpize.com) hosts this 
 bills a subscription; calls go through the publisher's key, so a subscriber needs no
 Market Pulse account. It is paid access only. The npm package above remains free.
 
+## Where it is listed
+
+[![T3rnel Market Pulse MCP server](https://glama.ai/mcp/servers/t3ratech/market-pulse-mcp/badges/score.svg)](https://glama.ai/mcp/servers/t3ratech/market-pulse-mcp)
+
+| Directory | Link |
+|---|---|
+| npm | [@t3ratech/market-pulse-mcp](https://www.npmjs.com/package/@t3ratech/market-pulse-mcp) |
+| Official MCP Registry | [io.github.t3ratech/market-pulse](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.t3ratech/market-pulse) |
+| Glama | [glama.ai/mcp/servers/t3ratech/market-pulse-mcp](https://glama.ai/mcp/servers/t3ratech/market-pulse-mcp) |
+| Smithery | [t3ratech-dev/market-pulse](https://smithery.ai/servers/t3ratech-dev/market-pulse) |
+| MCPize (managed, paid) | [t3ratech-market-pulse-mcp](https://mcpize.com/mcp/t3ratech-market-pulse-mcp) |
+| skills.sh (the skill) | [market-pulse](https://skills.sh/t3ratech/market-pulse-mcp/market-pulse) |
+
+Browse the [Claude Market](https://www.claudemarket.ai) MCP directory.
+
 ## Configuration
 
 | Variable | Default | Meaning |
