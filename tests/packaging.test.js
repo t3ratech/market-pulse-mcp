@@ -113,7 +113,8 @@ test("the MCPB manifest is derived: same version, same tools with full schemas, 
   for (const t of m.tools) assert.equal(typeof t.inputSchema, "object", `Smithery rejects a tool with no inputSchema (${t.name})`);
   assert.equal(m.user_config.api_key.sensitive, true);
   assert.equal(m.user_config.api_key.required, false);
-  assert.ok(existsSync(join(root, "assets", m.icon.replace(/^/, ""))) || existsSync(join(root, "assets", "icon.png")));
+  assert.equal(m.icon, "icon.png");
+  assert.ok(existsSync(join(root, "assets", "icon.png")), "the manifest names an icon the build copies from assets/");
   assert.match(m.long_description, new RegExp(`${TOOLS.length} read-only tools`));
 });
 
