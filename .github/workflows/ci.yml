@@ -28,3 +28,12 @@ jobs:
         run: |
           printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"0"}}}' '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' | docker run -i --rm market-pulse-mcp | tee out.jsonl
           test "$(grep -c pulse_lanes out.jsonl)" -ge 1
+  plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npx -y @anthropic-ai/claude-code@latest plugin validate .
+      - run: npx -y @anthropic-ai/claude-code@latest plugin validate .claude-plugin/plugin.json

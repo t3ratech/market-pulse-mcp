@@ -6,6 +6,7 @@ Issues and pull requests are welcome; maintainers answer issues within three wor
 npm test                    # the whole suite — no network, no dependencies to install
 npm run sync-tools:check    # tools.json matches the Market Pulse service source (monorepo checkout)
 npm run verify:live         # the deployed service: protocol round-trips, tools.json == live
+npx -y @anthropic-ai/claude-code plugin validate .   # plugin + marketplace manifests
 ```
 
 Rules that keep the package honest:
