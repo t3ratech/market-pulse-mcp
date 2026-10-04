@@ -1,0 +1,24 @@
+T3rnel Market Pulse MCP
+Copyright 2026 T3raTech Solutions (Pvt) Ltd
+
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+What this licence covers
+------------------------
+
+This licence covers the MCP server in this repository: the npm package
+@t3ratech/market-pulse-mcp, its tool definitions, the agent skill in
+agent-skills/ and the Claude Code plugin manifest. It is free to use, fork and
+redistribute.
+
+It does not cover the Market Pulse service it connects to, nor the data that
+service returns. The service is hosted at https://market-pulse.t3ratech.co.zw under
+its own terms (https://market-pulse.t3ratech.co.zw/terms) and its paid tiers buy
+delivery capacity, never a grade.
+
+Trademarks
+----------
+
+"T3rnel", "T3raTech" and "Market Pulse" are trademarks of T3raTech Solutions (Pvt)
+Ltd. Section 6 of the Apache License grants no trademark rights. A fork may use this
+code; it may not present itself as T3rnel or as published by T3raTech.

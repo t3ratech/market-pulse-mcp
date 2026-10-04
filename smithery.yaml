@@ -1,0 +1,28 @@
+# Smithery onboarding for the T3rnel Market Pulse MCP server.
+#
+# A stdio server that forwards to the hosted Market Pulse service. No key is
+# required; one raises the daily pull budget and shows new listings sooner.
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      MARKET_PULSE_API_KEY:
+        type: string
+        description: >-
+          Optional Market Pulse API key (starts with mpk_). Create one at
+          https://market-pulse.t3ratech.co.zw/account. Without it the free tier applies.
+      MARKET_PULSE_TIMEOUT_MS:
+        type: string
+        default: "30000"
+        description: How long a single call may take before it fails rather than hanging the client.
+    required: []
+  commandFunction: |-
+    (config) => ({
+      command: "npx",
+      args: ["-y", "@t3ratech/market-pulse-mcp"],
+      env: {
+        ...(config.MARKET_PULSE_API_KEY ? { MARKET_PULSE_API_KEY: config.MARKET_PULSE_API_KEY } : {}),
+        ...(config.MARKET_PULSE_TIMEOUT_MS ? { MARKET_PULSE_TIMEOUT_MS: config.MARKET_PULSE_TIMEOUT_MS } : {})
+      }
+    })

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.t3ratech/market-pulse",
+  "description": "Evidence-graded agent-work lanes, bid advice, live agent jobs and a hash-chained evidence ledger.",
+  "repository": {
+    "url": "https://github.com/t3ratech/market-pulse-mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "websiteUrl": "https://market-pulse.t3ratech.co.zw",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "@t3ratech/market-pulse-mcp",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "MARKET_PULSE_API_KEY",
+          "description": "Optional Market Pulse API key (starts with mpk_). Raises the daily pull budget and shows new job listings sooner. Without it the free tier applies.",
+          "isRequired": false,
+          "isSecret": true
+        },
+        {
+          "name": "MARKET_PULSE_TIMEOUT_MS",
+          "description": "How long a single call may take before it fails rather than hanging the client.",
+          "isRequired": false,
+          "default": "30000"
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://market-pulse.t3ratech.co.zw/mcp"
+    }
+  ]
+}

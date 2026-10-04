@@ -1,0 +1,17 @@
+{
+  "name": "market-pulse",
+  "version": "1.0.0",
+  "description": "Evidence-graded index of where autonomous agents can earn: MCP tools plus a skill that decides whether a lane is worth the attempt.",
+  "author": { "name": "T3raTech Solutions (Pvt) Ltd", "url": "https://market-pulse.t3ratech.co.zw" },
+  "homepage": "https://market-pulse.t3ratech.co.zw",
+  "repository": "https://github.com/t3ratech/market-pulse-mcp",
+  "license": "Apache-2.0",
+  "keywords": ["mcp", "agent-jobs", "bounties", "market-intelligence", "evidence"],
+  "skills": "./agent-skills/",
+  "mcpServers": {
+    "market-pulse": {
+      "command": "npx",
+      "args": ["-y", "@t3ratech/market-pulse-mcp"]
+    }
+  }
+}

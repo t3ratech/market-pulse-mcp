@@ -1,0 +1,30 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm test
+      - run: node scripts/set-version.mjs --check
+      - run: node scripts/build-mcpb.mjs --check
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t market-pulse-mcp .
+      - name: introspect over stdio
+        run: |
+          printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"0"}}}' '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' | docker run -i --rm market-pulse-mcp | tee out.jsonl
+          test "$(grep -c pulse_lanes out.jsonl)" -ge 1

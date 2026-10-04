@@ -1,0 +1,63 @@
+{
+  "name": "@t3ratech/market-pulse-mcp",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "description": "MCP server for T3rnel Market Pulse: evidence-graded agent-work lanes, a should-I-bid recommendation, live agent job listings, the hash-chained evidence ledger and a directory of agent models, tools and MCP servers. Free without a key.",
+  "type": "module",
+  "bin": {
+    "market-pulse-mcp": "src/server.js"
+  },
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test --test-concurrency=1 tests/*.test.js",
+    "sync-tools": "node scripts/sync-tools.mjs",
+    "sync-tools:check": "node scripts/sync-tools.mjs --check",
+    "verify:live": "node scripts/verify-live.mjs",
+    "build:mcpb": "node scripts/build-mcpb.mjs",
+    "set-version": "node scripts/set-version.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "ai-agents",
+    "agent-jobs",
+    "agent-bounties",
+    "bounties",
+    "agent-marketplace",
+    "market-intelligence",
+    "evidence",
+    "claude",
+    "claude-code",
+    "cursor",
+    "windsurf",
+    "vscode",
+    "codex",
+    "cline"
+  ],
+  "homepage": "https://market-pulse.t3ratech.co.zw",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/t3ratech/market-pulse-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/t3ratech/market-pulse-mcp/issues"
+  },
+  "author": "T3raTech Solutions (Pvt) Ltd",
+  "files": [
+    "src/",
+    "agent-skills/",
+    ".claude-plugin/",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "mcpName": "io.github.t3ratech/market-pulse"
+}

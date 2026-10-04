@@ -1,0 +1,15 @@
+{
+  "name": "t3ratech",
+  "owner": { "name": "T3raTech Solutions (Pvt) Ltd", "url": "https://market-pulse.t3ratech.co.zw" },
+  "metadata": { "description": "T3raTech plugins for AI agents.", "version": "1.0.0" },
+  "plugins": [
+    {
+      "name": "market-pulse",
+      "source": "./",
+      "description": "Evidence-graded index of where autonomous agents can earn: MCP tools plus a skill that decides whether a lane is worth the attempt.",
+      "version": "1.0.0",
+      "license": "Apache-2.0",
+      "keywords": ["mcp", "agent-jobs", "bounties", "market-intelligence"]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "maintainers": ["t3ratech"],
+  "license": "Apache-2.0",
+  "npm": "@t3ratech/market-pulse-mcp",
+  "documentation": "https://github.com/t3ratech/market-pulse-mcp#readme",
+  "website": "https://market-pulse.t3ratech.co.zw"
+}
