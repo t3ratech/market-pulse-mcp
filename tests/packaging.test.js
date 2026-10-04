@@ -89,15 +89,6 @@ test("the Dockerfile builds a non-root stdio image from a pinned base with no se
   for (const dir of ["src", "agent-skills"]) assert.ok(existsSync(join(root, dir)));
 });
 
-test("the MCPize manifest is paid-managed: the publisher's key is a secret, never a per-user credential", () => {
-  const y = read("mcpize.yaml");
-  assert.match(y, /^runtime: container$/m);
-  assert.match(y, /^secrets:\n  - name: MARKET_PULSE_API_KEY\n    required: true$/m, "MCPize rejects a secret that does not say whether it is required");
-  assert.doesNotMatch(y, /^credentials/m, "subscribers must not be asked for a Market Pulse key");
-  assert.doesNotMatch(y, /mpk_/);
-  assert.match(y, /paid access buys delivery, not verdicts/i);
-});
-
 test("Smithery config exposes the key and timeout and nothing else", () => {
   const y = read("smithery.yaml");
   assert.match(y, /type: stdio/);
@@ -133,7 +124,7 @@ test("the published tarball contains the runtime, skill and plugin — and not t
   for (const must of ["src/server.js", "src/tools.json", "src/client.js", "agent-skills/market-pulse/SKILL.md", ".claude-plugin/plugin.json", "README.md", "LICENSE", "NOTICE", "package.json"]) {
     assert.ok(files.includes(must), `tarball is missing ${must}`);
   }
-  for (const f of files) assert.doesNotMatch(f, /^(tests|scripts|build|node_modules|\.github)\/|\.env|mcpize\.yaml|Dockerfile/, `tarball must not ship ${f}`);
+  for (const f of files) assert.doesNotMatch(f, /^(tests|scripts|build|node_modules|\.github|mcpize)\/|\.env|mcpize\.yaml|Dockerfile/, `tarball must not ship ${f}`);
   assert.ok(out[0].size < 60 * 1024, `tarball is ${out[0].size} bytes`);
 });
 
@@ -161,8 +152,25 @@ test("the README's listing table links only to https destinations and keeps the 
   const readme = read("README.md");
   const section = readme.split("## Where it is listed")[1].split("## Configuration")[0];
   const links = [...section.matchAll(/\]\((https?:[^)]+)\)/g)].map(m => m[1]);
-  assert.ok(links.length >= 7);
+  assert.ok(links.length >= 10);
   for (const link of links) assert.match(link, /^https:\/\//, link);
-  assert.match(section, /MCPize \(managed, paid\)/);
+  assert.match(section, /MCPize \(paid, one listing per tier\)/);
+  for (const slug of ["t3ratech-market-pulse-mcp", "t3ratech-market-pulse-mcp-pro", "t3ratech-market-pulse-mcp-max", "t3ratech-market-pulse-mcp-operator"]) assert.ok(section.includes(`mcpize.com/mcp/${slug}`), slug);
   assert.match(section, /glama\.ai\/mcp\/servers\/t3ratech\/market-pulse-mcp\/badges\/score\.svg/);
+});
+
+test("the README documents the tier notices and the MCPize activation, and never calls the paid channel free", () => {
+  const readme = read("README.md");
+  assert.match(readme, /## What the free tier costs you/);
+  assert.match(readme, /tierNotice/);
+  assert.match(readme, /priced exactly like that tier on Market Pulse/);
+  assert.match(readme, /your own Market Pulse API key/);
+  assert.match(readme, /identical on every tier/);
+  const mcpizeSection = readme.split("### Subscribe through MCPize (paid)")[1].split("## ")[0];
+  assert.doesNotMatch(mcpizeSection, /free tier|no key needed/i);
+});
+
+test("the skill tells an agent to relay the tier notice and names the fields it carries", () => {
+  const skill = read("agent-skills/market-pulse/SKILL.md");
+  for (const needle of ["Relay the tier notice", "tierNotice", "hiddenListings", "bidsAlreadyPlaced", "never imply an upgrade changes a grade", "MCPize"]) assert.ok(skill.includes(needle), `the skill must mention ${needle}`);
 });

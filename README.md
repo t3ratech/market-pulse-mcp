@@ -80,11 +80,27 @@ evidence** — that independence is the product.
 }
 ```
 
-### Managed access on MCPize (paid)
+### Subscribe through MCPize (paid)
 
-Prefer not to manage a key? The [MCPize listing](https://mcpize.com) hosts this server and
-bills a subscription; calls go through the publisher's key, so a subscriber needs no
-Market Pulse account. It is paid access only. The npm package above remains free.
+Prefer paying on [MCPize](https://mcpize.com)? There is one listing per tier, each with a single
+plan **priced exactly like that tier on Market Pulse** (read from the service's own plan catalog —
+`node scripts/mcpize-verify.mjs` checks it): [Basic](https://mcpize.com/mcp/t3ratech-market-pulse-mcp),
+[Pro](https://mcpize.com/mcp/t3ratech-market-pulse-mcp-pro),
+[Max](https://mcpize.com/mcp/t3ratech-market-pulse-mcp-max),
+[Operator](https://mcpize.com/mcp/t3ratech-market-pulse-mcp-operator). When you connect, MCPize asks
+for **your own Market Pulse API key** (free to create). On your first call Market Pulse activates the
+tier you paid for on *that* account through its billing rail (WavePay) — the same entitlement a
+purchase on the Market Pulse site creates — so the fresher data and larger pull budget work through
+every surface, including the free npm package above. Paid access buys delivery, never a grade.
+
+## What the free tier costs you
+
+The tools tell you, in the website's own terms, what your tier is hiding. On the free and Basic
+tiers `pulse_jobs`, `pulse_lanes`, `pulse_lane_detail`, `pulse_should_i_bid` and `pulse_account`
+return a `tierNotice`: how many newer listings are hidden from you, how many bids already landed on
+the listings you *can* see, what each plan costs and how much sooner it shows listings, and where to
+upgrade. Every figure is derived from the plan catalog and the stored listings; grades, ranks and
+evidence are identical on every tier. An agent following the bundled skill relays the notice to you.
 
 ## Where it is listed
 
@@ -96,7 +112,7 @@ Market Pulse account. It is paid access only. The npm package above remains free
 | Official MCP Registry | [io.github.t3ratech/market-pulse](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.t3ratech/market-pulse) |
 | Glama | [glama.ai/mcp/servers/t3ratech/market-pulse-mcp](https://glama.ai/mcp/servers/t3ratech/market-pulse-mcp) |
 | Smithery | [t3ratech-dev/market-pulse](https://smithery.ai/servers/t3ratech-dev/market-pulse) |
-| MCPize (managed, paid) | [t3ratech-market-pulse-mcp](https://mcpize.com/mcp/t3ratech-market-pulse-mcp) |
+| MCPize (paid, one listing per tier) | [Basic](https://mcpize.com/mcp/t3ratech-market-pulse-mcp) · [Pro](https://mcpize.com/mcp/t3ratech-market-pulse-mcp-pro) · [Max](https://mcpize.com/mcp/t3ratech-market-pulse-mcp-max) · [Operator](https://mcpize.com/mcp/t3ratech-market-pulse-mcp-operator) |
 | skills.sh (the skill) | [market-pulse](https://skills.sh/t3ratech/market-pulse-mcp/market-pulse) |
 
 Browse the [Claude Market](https://www.claudemarket.ai) MCP directory.

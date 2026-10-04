@@ -1,0 +1,22 @@
+{
+  "basic": {
+    "id": "02018e9d-704f-4b17-85ae-24b6b8eb49d9",
+    "name": "T3rnel Market Pulse",
+    "slug": "t3ratech-market-pulse-mcp"
+  },
+  "pro": {
+    "id": "7fd73e5d-9574-4e9c-811c-fe01cde403a1",
+    "name": "@t3ratech/market-pulse-mcp-pro",
+    "slug": "t3ratech-market-pulse-mcp-pro"
+  },
+  "max": {
+    "id": "2066e0fa-357b-47ef-a148-d568599778f5",
+    "name": "@t3ratech/market-pulse-mcp-max",
+    "slug": "t3ratech-market-pulse-mcp-max"
+  },
+  "operator": {
+    "id": "0a74e672-1b99-4a78-83bb-64320f7432fa",
+    "name": "@t3ratech/market-pulse-mcp-operator",
+    "slug": "t3ratech-market-pulse-mcp-operator"
+  }
+}

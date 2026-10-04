@@ -1,0 +1,31 @@
+# MCPize manifest for one Market Pulse tier — rendered by scripts/mcpize-deploy.mjs.
+#
+# One MCPize listing per tier, each with one plan priced exactly like the tier on
+# Market Pulse (derived from its billing catalog, never typed here). MCPize carries no
+# plan or subscriber identity into the server, so the listing itself says which tier it
+# sells: the tier and its token are secrets of this deployment, and the buyer supplies
+# their own Market Pulse key as a per-user credential. On the buyer's first call the
+# service redeems a WavePay coupon for that tier on that key's account — the same
+# entitlement a purchase on market-pulse.t3ratech.co.zw creates, so the tier works on
+# every surface. Paid access buys delivery, never a grade.
+version: 1
+runtime: container
+startCommand:
+  type: stdio
+  command: node
+  args:
+    - mcpize/entry.js
+secrets:
+  - name: MARKET_PULSE_CHANNEL_TIER
+    required: true
+    description: The Market Pulse tier this listing sells.
+  - name: MARKET_PULSE_CHANNEL_TOKEN
+    required: true
+    description: Proof, issued by the Market Pulse service operator, that this deployment may activate that tier.
+credentials:
+  - name: MARKET_PULSE_API_KEY
+    required: true
+    description: Your Market Pulse API key (starts with mpk_). Your plan activates on this account. Create one free at https://market-pulse.t3ratech.co.zw/account or with POST /api/v1/agents/register.
+    mapping:
+      env: MARKET_PULSE_API_KEY
+credentials_mode: per_user
