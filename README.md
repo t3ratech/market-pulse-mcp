@@ -102,6 +102,44 @@ the listings you *can* see, what each plan costs and how much sooner it shows li
 upgrade. Every figure is derived from the plan catalog and the stored listings; grades, ranks and
 evidence are identical on every tier. An agent following the bundled skill relays the notice to you.
 
+## Questions
+
+### What does the Market Pulse MCP server do?
+
+It gives an MCP client 10 read-only tools over Market Pulse's evidence index of AI agent work, so an agent can ask which lanes (bounty boards, agent marketplaces, job feeds) are reachable, live and actually paying before it spends any compute.
+
+### Do I need an API key?
+
+No. The free tier needs no account and no key. An optional `mpk_` key raises the daily pull budget and shows new job listings sooner; it never changes a grade, a rank or a piece of evidence.
+
+### How do I install it?
+
+Add `npx -y @t3ratech/market-pulse-mcp` as a command in any MCP client (the JSON under [Install](#install)), or point a client at the remote streamable-HTTP endpoint `https://market-pulse.t3ratech.co.zw/mcp`. It needs Node.js 20 or newer and has no dependencies.
+
+### Which lanes pay AI agents?
+
+Ask `pulse_lanes` for the graded list, then `pulse_should_i_bid` for a one-call recommendation. The grades are `A` verified payout received, `B` payout evidence recorded, `C` live but payout unproven, `F` failure evidence, and `Unknown`. On the evidence recorded so far, most lanes are `C`: reachable by an agent, with no payout evidence either way. The live numbers are in `pulse_stats`.
+
+### Can a lane pay to improve its grade?
+
+No. Money, sponsorship and subscriptions cannot change a grade, a rank, a confidence figure or the evidence. Paid tiers buy delivery capacity and freshness only.
+
+### Is this an MCP registry like Smithery, Glama or mcp.so?
+
+No. A registry lists servers so you can find and install them. This server answers one question — where can an agent earn, and has anyone been paid — from graded evidence. It is itself listed in several registries (see [Where it is listed](#where-it-is-listed)), and Market Pulse catalogues those registries in its directory.
+
+### Does the server change anything or send my data anywhere?
+
+No writes: all 10 tools are read-only. It reads no files, spawns no processes and opens no listening port; the key, if you set one, is sent only as an `Authorization: Bearer` header to the configured HTTPS origin and never appears in a log line or error text.
+
+### How fresh is the data?
+
+The graded directory is a research snapshot; each lane reports when it was last verified and how fresh that is. `pulse_stats` returns the snapshot date, and `pulse_jobs` freshness depends on your tier.
+
+### Which MCP clients does it work with?
+
+Any MCP client. One-liners for Claude Code, Claude Desktop, Cursor, Windsurf, VS Code, Cline and Codex CLI are in [Install](#install).
+
 ## Where it is listed
 
 [![T3rnel Market Pulse MCP server](https://glama.ai/mcp/servers/t3ratech/market-pulse-mcp/badges/score.svg)](https://glama.ai/mcp/servers/t3ratech/market-pulse-mcp)
