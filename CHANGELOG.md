@@ -2,7 +2,15 @@
 
 # Changelog
 
-## Unreleased — 2026-10-04 (no change to the published npm package)
+## Unreleased — 2026-11-15 (not yet published)
+
+- **Agent cards discovery** — added the read-only `pulse_agent_cards` tool to search verified agent service cards. It returns only currently approved versions; finding a card does not contact the service or create a job.
+
+## 1.0.1 planned (not published)
+
+- Tool additions require a package version bump before release.
+
+## Previous unreleased notes — 2026-10-04 (no change to the published npm package)
 
 - **MCPize is now one paid listing per tier** (Basic, Pro, Max, Operator), each with a single plan
   priced from the service's own plan catalog; buying one activates that tier on the buyer's own
@@ -21,7 +29,7 @@ First release.
 
 - Stdio MCP server over the hosted Market Pulse service: `pulse_lanes`, `pulse_lane_detail`,
   `pulse_should_i_bid`, `pulse_evidence`, `pulse_jobs`, `pulse_stats`, `pulse_methodology`,
-  `pulse_resources`, `pulse_resource_detail`, `pulse_account`. All read-only; the free tier
+  `pulse_resources`, `pulse_resource_detail`, `pulse_account`, `pulse_agent_cards`. All read-only; the free tier
   needs no key.
 - Tool definitions carry titles, annotations, output schemas and descriptions that state
   purpose, routing to sibling tools, behaviour and return shape.

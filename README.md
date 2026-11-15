@@ -12,7 +12,7 @@ spends effort: **where can I actually earn, and has anyone been paid?**
 agent marketplaces, job feeds — from recorded evidence (`A` verified payout, `B` payout
 evidence, `C` live but unproven, `F` failure evidence, `Unknown`), and publishes the
 evidence hash-chained so a grade can be checked rather than trusted. This server gives
-any MCP client 10 read-only tools over that index. **No key is needed.**
+any MCP client 11 read-only tools over that index. **No key is needed.**
 
 ## Install
 
@@ -40,7 +40,7 @@ Requires Node.js 20 or newer. The package has no dependencies.
 
 ## Tools
 
-All ten are read-only and work on the free tier.
+All eleven are read-only and work on the free tier.
 
 | Tool | Use it to |
 |---|---|
@@ -54,6 +54,7 @@ All ten are read-only and work on the free tier.
 | `pulse_resources` | Search the agent directory of models, MCP servers, frameworks, tools and platforms |
 | `pulse_resource_detail` | One directory entry's full record |
 | `pulse_account` | Which tier this connection is served at, the daily quota left, and where to upgrade |
+| `pulse_agent_cards` | Search owner-verified AI agent services by skill or description; this discovers services and does not contact them or create work |
 
 Arguments are validated against the published schema before any request is sent. A wrong
 value is refused by name with the values that work — never answered with an empty list,
@@ -106,7 +107,7 @@ evidence are identical on every tier. An agent following the bundled skill relay
 
 ### What does the Market Pulse MCP server do?
 
-It gives an MCP client 10 read-only tools over Market Pulse's evidence index of AI agent work, so an agent can ask which lanes (bounty boards, agent marketplaces, job feeds) are reachable, live and actually paying before it spends any compute.
+It gives an MCP client 11 read-only tools over Market Pulse's evidence index of AI agent work, so an agent can ask which lanes (bounty boards, agent marketplaces, job feeds) are reachable, live and actually paying before it spends any compute.
 
 ### Do I need an API key?
 
@@ -130,7 +131,7 @@ No. A registry lists servers so you can find and install them. This server answe
 
 ### Does the server change anything or send my data anywhere?
 
-No writes: all 10 tools are read-only. It reads no files, spawns no processes and opens no listening port; the key, if you set one, is sent only as an `Authorization: Bearer` header to the configured HTTPS origin and never appears in a log line or error text.
+No writes: all 11 tools are read-only. It reads no files, spawns no processes and opens no listening port; the key, if you set one, is sent only as an `Authorization: Bearer` header to the configured HTTPS origin and never appears in a log line or error text.
 
 ### How fresh is the data?
 

@@ -9,9 +9,9 @@ const read = rel => readFileSync(fileURLToPath(new URL(`../${rel}`, import.meta.
 // Glama scores each tool description on behaviour, conciseness, completeness,
 // parameters, purpose and usage guidelines. These are the deterministic parts of that
 // rubric, so a tool added later is written to it the day it is added.
-test("there are exactly ten tools with unique snake_case names", () => {
-  assert.equal(TOOLS.length, 10);
-  assert.equal(new Set(TOOLS.map(t => t.name)).size, 10);
+test("tool names are unique snake_case identifiers", () => {
+  assert.ok(TOOLS.length >= 1);
+  assert.equal(new Set(TOOLS.map(t => t.name)).size, TOOLS.length);
   for (const t of TOOLS) assert.match(t.name, /^pulse_[a-z_]+$/);
 });
 
@@ -67,7 +67,7 @@ test("the README documents every tool, and states the real count", () => {
   const readme = read("README.md");
   for (const t of TOOLS) assert.ok(readme.includes(`\`${t.name}\``), `README is missing ${t.name}`);
   assert.match(readme, new RegExp(`any MCP client ${TOOLS.length} read-only tools`));
-  assert.match(readme, new RegExp(`All ${["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"][TOOLS.length]} are read-only`));
+  assert.match(readme, new RegExp(`All ${["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven"][TOOLS.length]} are read-only`));
 });
 
 test("the changelog names every tool the release ships", () => {

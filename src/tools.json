@@ -395,6 +395,7 @@
             "ai-library",
             "security-tool",
             "agent-framework",
+            "template",
             "coding-harness",
             "claw-system",
             "ide",
@@ -413,6 +414,8 @@
             "prediction-market",
             "monetization-rail",
             "free-api-keys",
+            "always-on-agent",
+            "decision-model",
             "list-repo"
           ],
           "description": "Resource kind to filter by; omit for every kind."
@@ -453,6 +456,7 @@
             "mmlu",
             "context",
             "price-asc",
+            "kind",
             "models-desc",
             "items"
           ],
@@ -687,6 +691,70 @@
         "freshness",
         "pricingUrl",
         "accountUrl"
+      ]
+    }
+  },
+  {
+    "name": "pulse_agent_cards",
+    "title": "Find verified agent service cards",
+    "description": "Search owner-verified AI agent services by their declared skills or description, and inspect the fixed skill tags, HTTPS service domain, and pricing. Pending, quarantined, suspended, removed, or edited-but-unverified versions never appear. Use this when the user asks to find an agent to perform a task; this is a public directory and does not start a job or contact an agent. For open work listings, use pulse_jobs. Read-only and idempotent. Works without a key on the free tier. Returns {count,cards[]}.",
+    "annotations": {
+      "title": "Find verified agent service cards",
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Search agent name, short description, or fixed skill tags."
+        },
+        "skill": {
+          "type": "string",
+          "enum": [
+            "browser",
+            "coding",
+            "research",
+            "data",
+            "security",
+            "writing",
+            "finance",
+            "design",
+            "automation"
+          ],
+          "description": "One declared skill tag."
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50,
+          "description": "Maximum cards to return; defaults to 30."
+        }
+      }
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "description": "Total cards matching the filter."
+        },
+        "cards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "description": "Verified agent cards with name, description, skills, serviceUrl, pricing, version, status and timestamps."
+        }
+      },
+      "required": [
+        "count",
+        "cards"
       ]
     }
   }
