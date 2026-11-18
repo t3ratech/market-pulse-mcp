@@ -9,6 +9,7 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { fetchPlans } from "./lib/plans.mjs";
+import { fetchRetry } from "./lib/fetch-retry.mjs";
 
 const servers = JSON.parse(readFileSync(fileURLToPath(new URL("../mcpize/servers.json", import.meta.url)), "utf8"));
 const plans = await fetchPlans();
@@ -18,7 +19,13 @@ const check = (name, ok, detail = "") => { console.log(`${ok ? "ok  " : "FAIL"} 
 for (const plan of plans) {
   const entry = servers[plan.tier];
   if (!entry) { check(`${plan.tier}: has an MCPize listing`, false, "missing from mcpize/servers.json"); continue; }
-  const page = await (await fetch(`https://mcpize.com/mcp/${entry.slug}`, { headers: { "user-agent": "Mozilla/5.0" } })).text();
+  let page;
+  try {
+    page = await (await fetchRetry(`https://mcpize.com/mcp/${entry.slug}`, { headers: { "user-agent": "Mozilla/5.0" } })).text();
+  } catch (error) {
+    check(`${plan.tier}: listing page is reachable`, false, error.message);
+    continue;
+  }
   const text = page.replace(/<script[\s\S]*?<\/script>/g, " ").replace(/<[^>]+>/g, " ").replace(/&#x27;|&#39;|&apos;/g, "'").replace(/&amp;/g, "&").replace(/\s+/g, " ");
   // Only the buying surfaces count: the description's comparison table lists every tier's price.
   const billing = /Monthly billing\s*\$\s?(\d+(?:\.\d+)?)\s*\/\s*month/.exec(text)?.[1];
@@ -31,8 +38,12 @@ for (const plan of plans) {
   check(`${plan.tier}: no free plan is offered`, !/\$\s?0\s*\/\s*mo|\bFree\b/.test(cards));
   const needs = text.includes("Start using this server") ? text.split("Start using this server")[1].split("MCPize The marketplace")[0] : "";
   check(`${plan.tier}: connecting asks for the buyer's own Market Pulse key`, /You'll need\s+MARKET_PULSE_API_KEY/.test(needs));
-  const gateway = await fetch(`https://${entry.slug}.mcpize.run/mcp`, { method: "POST", headers: { "content-type": "application/json", accept: "application/json, text/event-stream" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/list" }) });
-  check(`${plan.tier}: the gateway refuses an unauthenticated call`, gateway.status === 401, `HTTP ${gateway.status}`);
+  try {
+    const gateway = await fetchRetry(`https://${entry.slug}.mcpize.run/mcp`, { method: "POST", headers: { "content-type": "application/json", accept: "application/json, text/event-stream" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/list" }) });
+    check(`${plan.tier}: the gateway refuses an unauthenticated call`, gateway.status === 401, `HTTP ${gateway.status}`);
+  } catch (error) {
+    check(`${plan.tier}: the gateway is reachable`, false, error.message);
+  }
 }
 console.log(failed ? `\n${failed} check(s) failed` : "\nMCPize listings agree with the service's plans");
 process.exit(failed ? 1 : 0);
