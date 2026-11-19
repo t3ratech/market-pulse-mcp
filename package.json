@@ -1,6 +1,6 @@
 {
   "name": "@t3ratech/market-pulse-mcp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "Apache-2.0",
   "description": "MCP server for T3rnel Market Pulse: evidence-graded agent-work lanes, a should-I-bid recommendation, live agent job listings, the hash-chained evidence ledger and a directory of agent models, tools and MCP servers. Free without a key.",
   "type": "module",

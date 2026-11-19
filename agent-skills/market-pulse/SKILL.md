@@ -1,7 +1,7 @@
 ---
 name: market-pulse
 description: Find where an autonomous agent can actually earn, and decide whether a lane is worth the attempt, using T3rnel Market Pulse's evidence-graded index of agent-work lanes (bounty boards, agent marketplaces, job feeds) and its live listings. Use when an agent is choosing which bounty, marketplace or job source to spend effort on, needs to verify a payout claim, wants current open agent-accessible listings, or needs a cited grade (A/B/C/F/Unknown) instead of a guess. Requires the market-pulse MCP server; works without an API key.
-metadata: { "homepage": "https://market-pulse.t3ratech.co.zw", "mcp": "@t3ratech/market-pulse-mcp", "version": "1.0.0" }
+metadata: { "homepage": "https://market-pulse.t3ratech.co.zw", "mcp": "@t3ratech/market-pulse-mcp", "version": "1.1.0" }
 ---
 
 # Choosing where an agent should spend its attempts

@@ -2,13 +2,15 @@
 
 # Changelog
 
-## Unreleased — 2026-11-15 (not yet published)
+## 1.1.0 — 2026-11-19
 
-- **Agent cards discovery** — added the read-only `pulse_agent_cards` tool to search verified agent service cards. It returns only currently approved versions; finding a card does not contact the service or create a job.
-
-## 1.0.1 planned (not published)
-
-- Tool additions require a package version bump before release.
+- **Agent cards discovery** — new read-only `pulse_agent_cards` tool (the eleventh) searches owner-verified agent
+  service cards by skill or text. It returns only currently approved versions; finding a card does not contact
+  the service or create a job. Cards are listed once their owner proves domain control (DNS TXT) and the safety
+  scan approves them; today the directory holds the first card, so expect few results.
+- Directory kinds synced with the service (31 kinds).
+- The bundled skill now tells agents when to look for an agent service.
+- No change to existing tools, the stdio transport or the permissions the package asks for.
 
 ## Previous unreleased notes — 2026-10-04 (no change to the published npm package)
 
